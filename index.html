@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习工具-七年级上册专项 | 神人众集团</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+
+        <!-- ========== 首页 ========== -->
+        <div class="page page-home" id="pageHome">
+            <!-- 顶部标题 -->
+            <header class="site-header">
+                <img src="https://aka.doubaocdn.com/s/IV7L1wyU7r" alt="Logo" class="site-logo">
+                <div class="title-text">
+                    <h1>学习工具-七年级上册专项</h1>
+                    <p class="company">神人众集团 出品</p>
+                </div>
+            </header>
+
+            <!-- 第一部分：常用工具横栏 -->
+            <section class="section">
+                <h2 class="section-title">常用工具</h2>
+                <div class="tool-grid">
+                    <!-- 校历 -->
+                    <div class="tool-card" onclick="showModal('校历', '敬请期待')">
+                        <img src="https://aka.doubaocdn.com/s/zELb1wyU7r" alt="校历" class="tool-img">
+                        <h3>校历</h3>
+                        <p>查看学期校历安排</p>
+                    </div>
+                    <!-- 课程表 -->
+                    <div class="tool-card" onclick="showModal('课程表', '敬请期待')">
+                        <img src="https://aka.doubaocdn.com/s/9gJm1wyU7o" alt="课程表" class="tool-img">
+                        <h3>课程表</h3>
+                        <p>定制专属课程表</p>
+                    </div>
+                    <!-- 制定学习计划 -->
+                    <div class="tool-card" onclick="goTest()">
+                        <img src="https://aka.doubaocdn.com/s/0td41wyU7r" alt="学习计划" class="tool-img">
+                        <h3>制定学习计划</h3>
+                        <p>智能测评生成专属计划</p>
+                    </div>
+                    <!-- 题库 -->
+                    <div class="tool-card" onclick="showBookModal()">
+                        <img src="https://aka.doubaocdn.com/s/Kwte1wyU7p" alt="题库" class="tool-img">
+                        <h3>题库</h3>
+                        <p>七科同步练习题</p>
+                    </div>
+                    <!-- 番茄钟 -->
+                    <div class="tool-card" onclick="window.open('https://pomodoro.so/zh', '_blank')">
+                        <img src="https://aka.doubaocdn.com/s/IDLT1wyU7r" alt="番茄钟" class="tool-img">
+                        <h3>番茄钟</h3>
+                        <p>专注学习计时工具</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第二部分：科目学习 -->
+            <section class="section">
+                <h2 class="section-title">科目学习</h2>
+                <div class="subject-grid" id="subjectGrid"></div>
+            </section>
+
+            <footer class="site-footer">
+                <p>© 2026 神人众集团 版权所有</p>
+            </footer>
+        </div>
+
+        <!-- ========== 测评页面 ========== -->
+        <div class="page page-test" id="pageTest" style="display:none;">
+            <button class="back-btn" onclick="goHome()">← 返回首页</button>
+            <h2 class="page-title">小升初学情智能测评</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="progress-text" id="progressText">第 1 / 26 题</p>
+            
+            <div class="question-box" id="questionBox"></div>
+            
+            <div class="test-btns">
+                <button class="btn-secondary" id="prevBtn" onclick="prevQuestion()" disabled>上一题</button>
+                <button class="btn-primary" id="nextBtn" onclick="nextQuestion()">下一题</button>
+            </div>
+        </div>
+
+        <!-- ========== 测评结果页 ========== -->
+        <div class="page page-result" id="pageResult" style="display:none;">
+            <button class="back-btn" onclick="goHome()">← 返回首页</button>
+            <div class="result-card" id="resultCard"></div>
+            <div class="test-btns">
+                <button class="btn-primary" onclick="restartTest()">重新测评</button>
+            </div>
+        </div>
+
+        <!-- ========== 科目详情页 ========== -->
+        <div class="page page-subject" id="pageSubject" style="display:none;">
+            <button class="back-btn" onclick="goHome()">← 返回首页</button>
+            <h2 class="page-title" id="subjectTitle"></h2>
+            <div class="subject-detail-grid">
+                <div class="detail-card" onclick="showModal('教材原书', '敬请期待')">
+                    <div class="detail-icon">📖</div>
+                    <h3>教材原书</h3>
+                </div>
+                <div class="detail-card" onclick="showModal('重难点解析', '敬请期待')">
+                    <div class="detail-icon">🎯</div>
+                    <h3>重难点解析</h3>
+                </div>
+                <div class="detail-card" onclick="showModal('学霸笔记', '敬请期待')">
+                    <div class="detail-icon">📝</div>
+                    <h3>学霸笔记</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 通用弹窗 -->
+    <div class="modal-mask" id="modalMask" onclick="closeModal(event)">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <h3 id="modalTitle"></h3>
+            <p id="modalContent"></p>
+            <div id="modalExtra"></div>
+            <button class="btn-primary" onclick="closeModal()">关闭</button>
+        </div>
+    </div>
+
+    <!-- JS文件按顺序引入 -->
+    <script src="js/data.js"></script>
+    <script src="js/test.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
