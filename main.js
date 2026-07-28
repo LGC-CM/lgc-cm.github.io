@@ -58,7 +58,7 @@ function goHome() {
     document.getElementById('pageHome').style.display = 'block';
 }
 
-// ========== 打开科目详情（修复空白BUG，传统字符串拼接稳定版） ==========
+// ========== 打开科目详情 ==========
 function openSubject(name) {
     document.getElementById('pageHome').style.display = 'none';
     document.getElementById('subjectTitle').textContent = name + '专项';
@@ -76,15 +76,12 @@ function openSubject(name) {
     const info = linkMap[name];
     var html = "";
 
-    // 教材原书
     html += '<div class="detail-card" onclick="window.open(\'' + info.book + '\',\'_blank\',\'noopener,noreferrer\')">';
     html += '<div class="detail-icon">📖</div><h3>教材原书</h3></div>';
 
-    // 重难点解析
     html += '<div class="detail-card" onclick="showModal(\'重难点解析\', \'敬请期待\')">';
     html += '<div class="detail-icon">🎯</div><h3>重难点解析</h3></div>';
 
-    // 学霸笔记
     html += '<div class="detail-card" onclick="showModal(\'学霸笔记\', \'敬请期待\')">';
     html += '<div class="detail-icon">📝</div><h3>学霸笔记</h3></div>';
 
