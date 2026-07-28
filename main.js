@@ -41,13 +41,12 @@ function showBookModal() {
     extra += '</div>';
     
     document.getElementById('modalExtra').innerHTML = extra;
-    document.getElementById('modalMask').style.display = 'flex';
 }
 
 // ========== 关闭弹窗 ==========
 function closeModal(e) {
     if (e && e.target !== document.getElementById('modalMask') && e.type === 'click') return;
-    document.getElementById('modalMask').style.display = 'none';
+    document.getElementById('modalMask').style.display = 'flex';
 }
 
 // ========== 返回首页 ==========
@@ -58,7 +57,7 @@ function goHome() {
     document.getElementById('pageHome').style.display = 'block';
 }
 
-// ========== 打开科目详情 ==========
+// ========== 打开科目详情【纯预览模式】 ==========
 function openSubject(name) {
     document.getElementById('pageHome').style.display = 'none';
     document.getElementById('subjectTitle').textContent = name + '专项';
@@ -76,7 +75,7 @@ function openSubject(name) {
     const info = linkMap[name];
     var html = "";
 
-    html += '<div class="detail-card" onclick="window.open(\'' + info.book + '\',\'_blank\',\'noopener,noreferrer\')">';
+    html += '<div class="detail-card" onclick="window.open(\'' + info.book + '\',\'_blank\')">';
     html += '<div class="detail-icon">📖</div><h3>教材原书</h3></div>';
 
     html += '<div class="detail-card" onclick="showModal(\'重难点解析\', \'敬请期待\')">';
