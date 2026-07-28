@@ -58,9 +58,54 @@ function goHome() {
     document.getElementById('pageHome').style.display = 'block';
 }
 
-// ========== 打开科目详情 ==========
+// ========== 打开科目详情（PDF直打开终版） ==========
 function openSubject(name) {
     document.getElementById('pageHome').style.display = 'none';
     document.getElementById('subjectTitle').textContent = name + '专项';
+
+    const linkMap = {
+        "语文": {
+            book: "yw-book.pdf"
+        },
+        "数学": {
+            book: "sx-book.pdf"
+        },
+        "英语": {
+            book: "yy-book.pdf"
+        },
+        "道德与法治": {
+            book: "ddyfz-book.pdf"
+        },
+        "历史": {
+            book: "ls-book.pdf"
+        },
+        "生物": {
+            book: "sw-book.pdf"
+        },
+        "地理": {
+            book: "dl-book.pdf"
+        }
+    };
+
+    const info = linkMap[name];
+    let html = "";
+
+    html += `<div class="detail-card" onclick="window.open('${info.book}','_blank','noopener,noreferrer')">
+        <div class="detail-icon">📖</div>
+        <h3>教材原书</h3>
+    </div>`;
+
+    html += `
+        <div class="detail-card" onclick="showModal('重难点解析', '敬请期待')">
+            <div class="detail-icon">🎯</div>
+            <h3>重难点解析</h3>
+        </div>
+        <div class="detail-card" onclick="showModal('学霸笔记', '敬请期待')">
+            <div class="detail-icon">📝</div>
+            <h3>学霸笔记</h3>
+        </div>
+    `;
+
+    document.getElementById("detailContent").innerHTML = html;
     document.getElementById('pageSubject').style.display = 'block';
 }
