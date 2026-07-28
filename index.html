@@ -5,6 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>学习工具-七年级上册专项 | 神人众集团</title>
     <link rel="stylesheet" href="style.css">
+    <!-- ===== PDF.JS CDN 引入 ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.min.js"></script>
+    <style>
+        /* PDF预览弹窗额外样式 */
+        .pdf-preview-mask{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,0.75);
+            z-index:9999;
+            display:none;
+            align-items:center;
+            justify-content:center;
+            padding:16px;
+        }
+        .pdf-preview-box{
+            width:min(95%, 900px);
+            height:min(90vh, 850px);
+            background:#fff;
+            border-radius:12px;
+            display:flex;
+            flex-direction:column;
+            overflow:hidden;
+        }
+        .pdf-preview-head{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:12px 16px;
+            border-bottom:1px solid #eee;
+        }
+        .pdf-preview-canvas-wrap{
+            flex:1;
+            overflow:auto;
+            background:#e8e8e8;
+            display:flex;
+            justify-content:center;
+            padding:20px 0;
+        }
+        #pdfCanvas{
+            box-shadow:0 2px 12px #0003;
+        }
+        .pdf-preview-toolbar{
+            display:flex;
+            gap:10px;
+            align-items:center;
+        }
+        .pdf-preview-toolbar button{
+            padding:4px 10px;
+            cursor:pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -18,35 +69,29 @@
                 </div>
             </header>
 
-            <!-- 第一部分：常用工具横栏 -->
             <section class="section">
                 <h2 class="section-title">常用工具</h2>
                 <div class="tool-grid">
-                    <!-- 校历 -->
                     <div class="tool-card" onclick="showModal('校历', '敬请期待')">
                         <img src="https://aka.doubaocdn.com/s/zELb1wyU7r" alt="校历" class="tool-img">
                         <h3>校历</h3>
                         <p>查看学期校历安排</p>
                     </div>
-                    <!-- 课程表 -->
                     <div class="tool-card" onclick="showModal('课程表', '敬请期待')">
                         <img src="https://aka.doubaocdn.com/s/9gJm1wyU7o" alt="课程表" class="tool-img">
                         <h3>课程表</h3>
                         <p>定制专属课程表</p>
                     </div>
-                    <!-- 制定学习计划 -->
                     <div class="tool-card" onclick="goTest()">
                         <img src="https://aka.doubaocdn.com/s/0td41wyU7r" alt="学习计划" class="tool-img">
                         <h3>制定学习计划</h3>
                         <p>智能测评生成专属计划</p>
                     </div>
-                    <!-- 题库 -->
                     <div class="tool-card" onclick="showBookModal()">
                         <img src="https://aka.doubaocdn.com/s/Kwte1wyU7p" alt="题库" class="tool-img">
                         <h3>题库</h3>
                         <p>七科同步练习题</p>
                     </div>
-                    <!-- 番茄钟 -->
                     <div class="tool-card" onclick="window.open('https://pomodoro.so/zh', '_blank')">
                         <img src="https://aka.doubaocdn.com/s/IDLT1wyU7r" alt="番茄钟" class="tool-img">
                         <h3>番茄钟</h3>
@@ -55,7 +100,6 @@
                 </div>
             </section>
 
-            <!-- 第二部分：科目学习 -->
             <section class="section">
                 <h2 class="section-title">科目学习</h2>
                 <div class="subject-grid" id="subjectGrid"></div>
@@ -92,7 +136,7 @@
             </div>
         </div>
 
-        <!-- ========== 科目详情页【关键：增加 id="detailContent"】 ========== -->
+        <!-- ========== 科目详情页 ========== -->
         <div class="page page-subject" id="pageSubject" style="display:none;">
             <button class="back-btn" onclick="goHome()">← 返回首页</button>
             <h2 class="page-title" id="subjectTitle"></h2>
@@ -101,13 +145,31 @@
         </div>
     </div>
 
-    <!-- 【重要】弹窗放到container外面，防止页面加载异常显示 -->
+    <!-- 通用弹窗 -->
     <div class="modal-mask" id="modalMask" onclick="closeModal(event)" style="display:none;">
         <div class="modal-box" onclick="event.stopPropagation()">
             <h3 id="modalTitle"></h3>
             <p id="modalContent"></p>
             <div id="modalExtra"></div>
             <button class="btn-primary" onclick="closeModal()">关闭</button>
+        </div>
+    </div>
+
+    <!-- ===== PDF预览弹窗【新增】 ===== -->
+    <div class="pdf-preview-mask" id="pdfMask" onclick="closePdfPreview()">
+        <div class="pdf-preview-box" onclick="event.stopPropagation()">
+            <div class="pdf-preview-head">
+                <h3 id="pdfTitle">教材原书预览</h3>
+                <div class="pdf-preview-toolbar">
+                    <button onclick="prevPdfPage()">上一页</button>
+                    <span id="pdfPageInfo">0 / 0</span>
+                    <button onclick="nextPdfPage()">下一页</button>
+                    <button onclick="closePdfPreview()">关闭</button>
+                </div>
+            </div>
+            <div class="pdf-preview-canvas-wrap">
+                <canvas id="pdfCanvas"></canvas>
+            </div>
         </div>
     </div>
 
