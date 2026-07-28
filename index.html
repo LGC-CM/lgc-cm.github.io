@@ -80,7 +80,7 @@
             <div class="question-box" id="questionBox"></div>
             
             <div class="test-btns">
-                <button class="btn-secondary" id="prevBtn" onclick="prevQuestion()" disabled>上一题</button>
+                <button class="btn-secondary" id="prevBtn" onclick="prevQuestion()">上一题</button>
                 <button class="btn-primary" id="nextBtn" onclick="nextQuestion()">下一题</button>
             </div>
         </div>
@@ -94,23 +94,11 @@
             </div>
         </div>
 
-        <!-- ========== 科目详情页 ========== -->
+        <!-- ========== 科目详情页【关键：增加 id="detailContent"】 ========== -->
         <div class="page page-subject" id="pageSubject" style="display:none;">
             <button class="back-btn" onclick="goHome()">← 返回首页</button>
             <h2 class="page-title" id="subjectTitle"></h2>
-            <div class="subject-detail-grid">
-                <div class="detail-card" onclick="showModal('教材原书', '敬请期待')">
-                    <div class="detail-icon">📖</div>
-                    <h3>教材原书</h3>
-                </div>
-                <div class="detail-card" onclick="showModal('重难点解析', '敬请期待')">
-                    <div class="detail-icon">🎯</div>
-                    <h3>重难点解析</h3>
-                </div>
-                <div class="detail-card" onclick="showModal('学霸笔记', '敬请期待')">
-                    <div class="detail-icon">📝</div>
-                    <h3>学霸笔记</h3>
-                </div>
+            <div class="subject-detail-grid" id="detailContent">
             </div>
         </div>
 
@@ -126,7 +114,6 @@
         </div>
     </div>
 
-    <!-- ✅ 已修改路径：移除 js/ 前缀，适配平铺文件 -->
     <script src="data.js"></script>
     <script src="test.js"></script>
     <script src="main.js"></script>
