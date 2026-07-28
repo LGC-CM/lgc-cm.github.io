@@ -1,9 +1,3 @@
-// ========== PDF.JS 全局配置 ==========
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.worker.min.js';
-let globalPdfDoc = null;
-let globalCurrentPage = 1;
-let globalScale = 1.4;
-
 // ========== 页面加载完成初始化 ==========
 window.onload = function() {
     renderSubjects();
@@ -64,7 +58,7 @@ function goHome() {
     document.getElementById('pageHome').style.display = 'block';
 }
 
-// ========== 打开科目详情 ==========
+// ========== 打开科目详情｜新标签打开PDF稳定版 ==========
 function openSubject(name) {
     document.getElementById('pageHome').style.display = 'none';
     document.getElementById('subjectTitle').textContent = name + '专项';
@@ -82,8 +76,8 @@ function openSubject(name) {
     const info = linkMap[name];
     var html = "";
 
-    // 点击调用PDF内嵌预览
-    html += '<div class="detail-card" onclick="openPdfPreview(\'' + info.book + '\',\'' + name + '教材原书\')">';
+    // 点击直接新开标签
+    html += '<div class="detail-card" onclick="window.open(\'' + info.book + '\',\'_blank\')">';
     html += '<div class="detail-icon">📖</div><h3>教材原书</h3></div>';
 
     html += '<div class="detail-card" onclick="showModal(\'重难点解析\', \'敬请期待\')">';
@@ -94,50 +88,4 @@ function openSubject(name) {
 
     document.getElementById("detailContent").innerHTML = html;
     document.getElementById('pageSubject').style.display = 'block';
-}
-
-// ===================== PDF预览相关函数 =====================
-function openPdfPreview(pdfUrl, title) {
-    document.getElementById("pdfTitle").textContent = title;
-    document.getElementById("pdfMask").style.display = "flex";
-    globalPdfDoc = null;
-    globalCurrentPage = 1;
-
-    const loadingTask = pdfjsLib.getDocument(pdfUrl);
-    loadingTask.promise.then(function(pdf) {
-        globalPdfDoc = pdf;
-        renderPdfPage(globalCurrentPage);
-    }).catch(err=>{
-        showModal("预览失败","文件加载异常，可尝试下载PDF本地打开");
-        console.error(err);
-    });
-}
-
-function renderPdfPage(pageNum) {
-    if(!globalPdfDoc) return;
-    globalPdfDoc.getPage(pageNum).then(function(page) {
-        const canvas = document.getElementById("pdfCanvas");
-        const ctx = canvas.getContext("2d");
-        const viewport = page.getViewport({scale: globalScale});
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        const renderCtx = {canvasContext: ctx, viewport: viewport};
-        page.render(renderCtx);
-        document.getElementById("pdfPageInfo").textContent = `${pageNum} / ${globalPdfDoc.numPages}`;
-    });
-}
-
-function prevPdfPage(){
-    if(!globalPdfDoc || globalCurrentPage <=1) return;
-    globalCurrentPage--;
-    renderPdfPage(globalCurrentPage);
-}
-function nextPdfPage(){
-    if(!globalPdfDoc || globalCurrentPage >= globalPdfDoc.numPages) return;
-    globalCurrentPage++;
-    renderPdfPage(globalCurrentPage);
-}
-function closePdfPreview(){
-    document.getElementById("pdfMask").style.display = "none";
-    globalPdfDoc = null;
 }
