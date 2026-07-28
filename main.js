@@ -41,12 +41,13 @@ function showBookModal() {
     extra += '</div>';
     
     document.getElementById('modalExtra').innerHTML = extra;
+    document.getElementById('modalMask').style.display = 'flex';
 }
 
 // ========== 关闭弹窗 ==========
 function closeModal(e) {
     if (e && e.target !== document.getElementById('modalMask') && e.type === 'click') return;
-    document.getElementById('modalMask').style.display = 'flex';
+    document.getElementById('modalMask').style.display = 'none';
 }
 
 // ========== 返回首页 ==========
