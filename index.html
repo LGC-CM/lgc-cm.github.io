@@ -8,56 +8,86 @@
 </head>
 <body>
     <div class="container">
+        <!-- 通用弹窗 -->
+        <div id="modalMask" onclick="closeModal(event)">
+            <div class="modal-box" onclick="event.stopPropagation()">
+                <h3 id="modalTitle"></h3>
+                <p id="modalContent"></p>
+                <div id="modalExtra"></div>
+                <button class="btn-primary" onclick="closeModal()">关闭</button>
+            </div>
+        </div>
 
         <!-- ========== 首页 ========== -->
         <div class="page page-home" id="pageHome">
-            <!-- 顶部标题 -->
             <header class="site-header">
-                <img src="https://aka.doubaocdn.com/s/IV7L1wyU7r" alt="Logo" class="site-logo">
-                <div class="title-text">
-                    <h1>学习工具-七年级上册专项</h1>
-                    <p class="company">神人众集团 出品</p>
+                <div class="header-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="#2563eb">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="header-title">学习工具-七年级上册专项</h1>
+                    <p class="header-sub">神人众集团 出品</p>
                 </div>
             </header>
 
-            <!-- 第一部分：常用工具横栏 -->
             <section class="section">
                 <h2 class="section-title">常用工具</h2>
                 <div class="tool-grid">
                     <!-- 校历 -->
                     <div class="tool-card" onclick="showModal('校历', '敬请期待')">
-                        <img src="https://aka.doubaocdn.com/s/zELb1wyU7r" alt="校历" class="tool-img">
+                        <div class="tool-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="#2563eb">
+                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
+                            </svg>
+                        </div>
                         <h3>校历</h3>
                         <p>查看学期校历安排</p>
                     </div>
                     <!-- 课程表 -->
                     <div class="tool-card" onclick="showModal('课程表', '敬请期待')">
-                        <img src="https://aka.doubaocdn.com/s/9gJm1wyU7o" alt="课程表" class="tool-img">
+                        <div class="tool-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="#2563eb">
+                                <path d="M3 3v18h18V3H3zm8 16H5v-6h6v6zm0-8H5V5h6v6zm8 8h-6v-6h6v6zm0-8h-6V5h6v6z"/>
+                            </svg>
+                        </div>
                         <h3>课程表</h3>
                         <p>定制专属课程表</p>
                     </div>
-                    <!-- 制定学习计划 -->
-                    <div class="tool-card" onclick="goTest()">
-                        <img src="https://aka.doubaocdn.com/s/0td41wyU7r" alt="学习计划" class="tool-img">
+                    <!-- 学情测评 -->
+                    <div class="tool-card" onclick="goHome()">
+                        <div class="tool-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="#2563eb">
+                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l4.59-4.58L18 11l-6 6z"/>
+                            </svg>
+                        </div>
                         <h3>制定学习计划</h3>
                         <p>智能测评生成专属计划</p>
                     </div>
                     <!-- 题库 -->
                     <div class="tool-card" onclick="showBookModal()">
-                        <img src="https://aka.doubaocdn.com/s/Kwte1wyU7p" alt="题库" class="tool-img">
+                        <div class="tool-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="#2563eb">
+                                <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
+                            </svg>
+                        </div>
                         <h3>题库</h3>
                         <p>七科同步练习题</p>
                     </div>
                     <!-- 番茄钟 -->
-                    <div class="tool-card" onclick="window.open('https://pomodoro.so/zh', '_blank')">
-                        <img src="https://aka.doubaocdn.com/s/IDLT1wyU7r" alt="番茄钟" class="tool-img">
+                    <div class="tool-card" onclick="window.open('https://pomodoro-timer.app/', '_blank')">
+                        <div class="tool-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="#2563eb">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                            </svg>
+                        </div>
                         <h3>番茄钟</h3>
                         <p>专注学习计时工具</p>
                     </div>
                 </div>
             </section>
 
-            <!-- 第二部分：科目学习 -->
             <section class="section">
                 <h2 class="section-title">科目学习</h2>
                 <div class="subject-grid" id="subjectGrid"></div>
@@ -68,55 +98,37 @@
             </footer>
         </div>
 
-        <!-- ========== 测评页面 ========== -->
-        <div class="page page-test" id="pageTest" style="display:none;">
+        <!-- ========== 学情测评页面 ========== -->
+        <div class="page page-test" id="pageTest" style="display: none;">
             <button class="back-btn" onclick="goHome()">← 返回首页</button>
-            <h2 class="page-title">小升初学情智能测评</h2>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <p class="progress-text" id="progressText">第 1 / 26 题</p>
-            
+            <h2 class="page-title">学情智能测评</h2>
             <div class="question-box" id="questionBox"></div>
-            
-            <div class="test-btns">
+            <div class="btn-group test-buttons">
                 <button class="btn-secondary" id="prevBtn" onclick="prevQuestion()">上一题</button>
                 <button class="btn-primary" id="nextBtn" onclick="nextQuestion()">下一题</button>
             </div>
         </div>
 
-        <!-- ========== 测评结果页 ========== -->
-        <div class="page page-result" id="pageResult" style="display:none;">
+        <!-- ========== 测评结果页面 ========== -->
+        <div class="page page-result" id="pageResult" style="display: none;">
             <button class="back-btn" onclick="goHome()">← 返回首页</button>
-            <div class="result-card" id="resultCard"></div>
-            <div class="test-btns">
-                <button class="btn-primary" onclick="restartTest()">重新测评</button>
-            </div>
+            <h2 class="page-title">测评结果</h2>
+            <div id="resultContent"></div>
+            <button class="btn-primary" onclick="restartTest()">重新测评</button>
         </div>
 
-        <!-- ========== 科目详情页【关键：增加 id="detailContent"】 ========== -->
-        <div class="page page-subject" id="pageSubject" style="display:none;">
+        <!-- ========== 科目详情页面【关键：id="detailContent"】 ========== -->
+        <div class="page page-subject" id="pageSubject" style="display: none;">
             <button class="back-btn" onclick="goHome()">← 返回首页</button>
             <h2 class="page-title" id="subjectTitle"></h2>
             <div class="subject-detail-grid" id="detailContent">
             </div>
         </div>
-
-    </div>
-
-    <!-- 通用弹窗 -->
-    <div class="modal-mask" id="modalMask" onclick="closeModal(event)">
-        <div class="modal-box" onclick="event.stopPropagation()">
-            <h3 id="modalTitle"></h3>
-            <p id="modalContent"></p>
-            <div id="modalExtra"></div>
-            <button class="btn-primary" onclick="closeModal()">关闭</button>
-        </div>
     </div>
 
     <script src="data.js"></script>
+    <script src="sw-book.js"></script>
     <script src="test.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
-
